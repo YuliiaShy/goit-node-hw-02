@@ -1,7 +1,7 @@
 const { Schema, model } = require("mongoose");
 const Joi = require("joi");
 const { schemaValidation } = require("../helpers");
-const bcrypt = require("bcryptjs");
+// const bcrypt = require("bcryptjs");
 
 const PASSWORD_REGEXP = /^[a-zA-Z0-9]{6,10}$/;
 const EMAIL_REGEXP =
@@ -28,16 +28,16 @@ const userSchema = new Schema(
     token: {
         type: String,
         default: null,
-    }
+    },
   },
   { versionKey: false, timestamps: true }
 );
 
 userSchema.post("save", schemaValidation);
 
-userSchema.methods.validatePassword = function (password) {
-  return bcrypt.compare(password, this.password);
-}
+// userSchema.methods.validatePassword = function (password) {
+//   return bcrypt.compare(password, this.password);
+// }
 
 const userAddSchema = Joi.object({
   email: Joi.string().pattern(EMAIL_REGEXP).required(),

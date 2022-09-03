@@ -4,13 +4,12 @@ const { RequestError } = require("../../helpers");
 
 const removeById = async (req, res) => {
   const { id } = req.params;
-  const { _id: owner } = req.user;
-  const result = await Contact.findByIdAndRemove(id, owner);
+  const result = await Contact.findByIdAndRemove(id);
   if (!result) {
     throw RequestError(404, "Not found");
   }
   res.json({
-    message: "Book deleted",
+    message: "Contact deleted",
   });
 };
 
