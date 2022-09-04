@@ -1,17 +1,17 @@
 const express = require('express');
 
 const { controllerWrapper } = require("../../helpers");
-const { validationBody, validationId } = require("../../middlewares");
-const ctrl = require("../../controllers");
+const { validationBody, validationId, authenticate } = require("../../middlewares");
+const ctrl = require("../../controllers/contacts");
 const {schemas} = require("../../models/contacts");
 const router = express.Router();
 
-router.get("/", controllerWrapper(ctrl.getAll)); 
+router.get("/", authenticate, controllerWrapper(ctrl.getAll)); 
 
 router.get("/:id", validationId, controllerWrapper(ctrl.getById)); 
 
 router.post(
-  "/",
+  "/", authenticate,
   validationBody(schemas.contactAddSchema),
   controllerWrapper(ctrl.add)
 ); 
