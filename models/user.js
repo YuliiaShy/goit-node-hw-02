@@ -18,14 +18,18 @@ const userSchema = new Schema(
       type: String,
       required: [true, "Set password for user"],
     },
-      subscription: {
+    subscription: {
       type: String,
       enum: ["starter", "pro", "business"],
       default: "starter",
     },
+    avatarURL: {
+      type: String,
+      required: [true, "Set avatar for user"],
+    },
     token: {
-        type: String,
-        default: null,
+      type: String,
+      default: "",
     },
   },
   { versionKey: false, timestamps: true }
